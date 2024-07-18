@@ -1,4 +1,5 @@
 ﻿using BusTracking.Core.Data;
+using BusTracking.Core.DTO;
 using BusTracking.Core.IService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,25 +18,25 @@ namespace BusTracking.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<UserResult>> GetAllUser()
         {
             return await _userService.GetAllUser();
         }
         [HttpGet]
         [Route("GetAllTeachers")]
-        public async Task<List<User>> GetAllTeachers()
+        public async Task<List<UserResult>> GetAllTeachers()
         {
             return await _userService.GetAllTeachers();
         }
         [HttpGet]
         [Route("GetAllDrivers")]
-        public async Task<List<User>> GetAllDrivers()
+        public async Task<List<UserResult>> GetAllDrivers()
         {
             return await _userService.GetAllDrivers();
         }
         [HttpGet]
         [Route("GetAllParents")]
-        public async Task<List<User>> GetAllParents()
+        public async Task<List<UserResult>> GetAllParents()
         {
             return await _userService.GetAllParents();
         }

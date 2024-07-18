@@ -35,6 +35,8 @@ namespace BusTracking.API
             builder.Services.AddScoped<ISearchChildrenService,SearchChildrenService>();
             builder.Services.AddScoped<IUpdateProfileRepository,UpdateProfileRepository>();
             builder.Services.AddScoped<IUpdateProfileService, UpdateProfileService>();
+            builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+
 
             builder.Services.AddAuthentication(x =>
             {

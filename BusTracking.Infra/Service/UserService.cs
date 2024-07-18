@@ -4,17 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusTracking.Core.Data;
+using BusTracking.Core.DTO;
 using BusTracking.Core.IRepository;
 using BusTracking.Core.IService;
+using BusTracking.Infra.Repository;
 
 namespace BusTracking.Infra.Service
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IRoleRepository _roleRepository;
+
+        public UserService(IRoleRepository roleRepository, IUserRepository userRepository)
         {
+            _roleRepository = roleRepository;
             _userRepository = userRepository;
+
         }
 
         public async Task CreateUser(User user)
@@ -27,29 +33,29 @@ namespace BusTracking.Infra.Service
             await _userRepository.DeleteUser(userid);
         }
 
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<UserResult>> GetAllUser()
         {
             return await _userRepository.GetAllUser();
         }
 
-        public async Task<List<User>> GetAllTeachers()
+        public async Task<List<UserResult>> GetAllTeachers()
         {
             var result=await _userRepository.GetAllUser();
-            var result2= result.Where(x=>x.Roleid==2);
+            var result2= result.Where(x=>x.Rolename == "Teacher");
             return result2.ToList();
         }
 
-        public async Task<List<User>> GetAllDrivers()
+        public async Task<List<UserResult>> GetAllDrivers()
         {
             var result = await _userRepository.GetAllUser();
-            var result2 = result.Where(x => x.Roleid == 5);
+            var result2 = result.Where(x => x.Rolename == "Driver");
             return result2.ToList();
         }
 
-        public async Task<List<User>> GetAllParents()
+        public async Task<List<UserResult>> GetAllParents()
         {
             var result = await _userRepository.GetAllUser();
-            var result2 = result.Where(x => x.Roleid == 3);
+            var result2 = result.Where(x => x.Rolename == "Parent");
             return result2.ToList();
         }
 

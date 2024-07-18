@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusTracking.Core.Data;
+using BusTracking.Core.DTO;
 using BusTracking.Core.ICommon;
 using BusTracking.Core.IRepository;
 using Dapper;
@@ -42,9 +43,9 @@ namespace BusTracking.Infra.Repository
 
         }
 
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<UserResult>> GetAllUser()
         {
-            var result = await _dBContext.Connection.QueryAsync<User>("user__package.get_all_user_", commandType: CommandType.StoredProcedure);
+            var result = await _dBContext.Connection.QueryAsync<UserResult>("user__package.get_all_user_", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
